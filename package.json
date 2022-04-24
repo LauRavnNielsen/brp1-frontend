@@ -1,0 +1,84 @@
+{
+  "name": "crm-portal",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@craco/craco": "^6.4.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@transifex/cli": "0.12.2",
+    "@transifex/native": "0.12.2",
+    "@transifex/react": "0.12.2",
+    "@wastehero/storybook": "file:../wastehero_storybook/local",
+    "antd": "^4.16.13",
+    "axios": "^0.24.0",
+    "babel-plugin-formatjs": "^10.3.11",
+    "craco-babel-loader": "^0.1.4",
+    "formik": "^2.2.9",
+    "formik-antd": "^2.0.1",
+    "history": "^5.1.0",
+    "material-design-icons": "^3.0.1",
+    "moment": "^2.29.1",
+    "polished": "^4.1.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-query": "^3.34.0",
+    "react-router-dom": "^5.1.7",
+    "react-scripts": "4.0.3",
+    "speed-measure-webpack-plugin": "^1.5.0",
+    "styled-components": "^5.3.3",
+    "typescript": "^4.1.2",
+    "use-local-storage-state": "^12.0.0",
+    "web-vitals": "^1.0.1",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
+    "lint": "eslint --ext .tsx --ext .ts --no-error-on-unmatched-pattern ./src/**",
+    "lint:write": "eslint --fix --ext .tsx --ext .ts --no-error-on-unmatched-pattern ./src/**"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^8.11.1",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.16",
+    "@types/react-dom": "^16.9.12",
+    "@types/react-router-dom": "5.1.8",
+    "@types/styled-components": "^5.1.15",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^19.0.0",
+    "eslint-config-airbnb-typescript": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.4.1"
+  }
+}
