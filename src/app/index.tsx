@@ -49,6 +49,8 @@ export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <PageContainer>
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-ignore */}
         <Router>
           {loggedIn && (
             <Menu
