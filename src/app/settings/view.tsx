@@ -7,11 +7,12 @@ import {
   ExclamationCircleOutlined,
 } from '@ant-design/icons';
 import { CreateAccountPost, DeleteAccountPost } from './api';
-import { UserContext } from '../context/user-context';
+import { UserContext, UserDispatchContext } from '../context/user-context';
 import { DeleteModal } from './delete-modal';
 
 export const SettingsView = () => {
   const { username } = useContext(UserContext);
+  const setUser = useContext(UserDispatchContext);
   const history = useHistory();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
@@ -49,6 +50,9 @@ export const SettingsView = () => {
       onSuccess: (data) => {
         if (data.data) {
           updateQuerySuccessNotification('bottom');
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          setUser({});
           history.push('/login');
         } else {
           updateAccountFailedNotification('bottom');

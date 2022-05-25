@@ -5,7 +5,7 @@ export const CreateAccountPost = (
   password: string,
   email: string
 ) => {
-  return axios.post(`http://localhost:8080/updateUserInfo`, {
+  return axios.put(`http://localhost:8080/updateUserInfo`, {
     username,
     password,
     email,

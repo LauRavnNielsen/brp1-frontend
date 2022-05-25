@@ -8,15 +8,17 @@ import { AdminContextProvider } from './app/context/admin-context';
 import { RememberAdminProvider } from './app/context/remember-me-admin-context';
 import { RememberUserProvider } from './app/context/remember-me-user-context';
 
+export const SPOON_KEY = '5c69d7252b5340aaaae0b81048fb2a94';
+
 ReactDOM.render(
   <React.StrictMode>
     <UserContextProvider>
       <AdminContextProvider>
-        <RememberAdminProvider>
-          <RememberUserProvider>
+        <RememberUserProvider>
+          <RememberAdminProvider>
             <App />
-          </RememberUserProvider>
-        </RememberAdminProvider>
+          </RememberAdminProvider>
+        </RememberUserProvider>
       </AdminContextProvider>
     </UserContextProvider>
   </React.StrictMode>,

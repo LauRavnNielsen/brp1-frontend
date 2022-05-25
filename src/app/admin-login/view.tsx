@@ -3,12 +3,16 @@ import { Button, Checkbox, Col, Form, Input, notification, Row } from 'antd';
 import { useMutation } from 'react-query';
 import { Link } from 'react-router-dom';
 import { LoginCall } from './api';
-import { AdminContext, AdminDispatchContext } from '../context/admin-context';
+import { AdminDispatchContext } from '../context/admin-context';
+import {
+  RememberAdminContext,
+  RememberAdminDispatchContext,
+} from '../context/remember-me-admin-context';
 
 export const AdminLoginView = () => {
   const setAdmin = useContext(AdminDispatchContext);
-  const setRememberAdmin = useContext(AdminDispatchContext);
-  const { username, password } = useContext(AdminContext);
+  const setRememberAdmin = useContext(RememberAdminDispatchContext);
+  const { username, password } = useContext(RememberAdminContext);
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [admin, setAdminState] = useState<{
     username: string;
@@ -42,7 +46,10 @@ export const AdminLoginView = () => {
         if (data.data) {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          setAdmin({ username });
+          setAdmin({
+            username: admin.username,
+            password: admin.password,
+          });
 
           if (rememberMe) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -7,13 +7,17 @@ import { LoginView } from './login/view';
 import { UserContext, UserDispatchContext } from './context/user-context';
 import { CreateView } from './create/view';
 import { PrivateRoute } from './routing/protected-route';
-import { FoodView } from './food/view';
+// eslint-disable-next-line import/no-cycle
 import { DietView } from './diet/view';
 import { GuideLinesView } from './guide-lines/view';
+// eslint-disable-next-line import/no-cycle
 import { TrackingView } from './tracking/view';
 import { AdminContext, AdminDispatchContext } from './context/admin-context';
 import { SettingsView } from './settings/view';
 import { AdminLoginView } from './admin-login/view';
+// eslint-disable-next-line import/no-cycle
+import { ManageRecipe } from './manage-recipe/view';
+import { ManageUsers } from './manage-users/view';
 
 const PageContainer = styled.div`
   display: flex;
@@ -23,6 +27,7 @@ const PageContainer = styled.div`
   position: relative;
   flex-direction: row;
   zindex: 1;
+  overflow: hidden;
 
   .material-icons {
     font-size: 24px !important;
@@ -30,21 +35,25 @@ const PageContainer = styled.div`
 `;
 
 export const App = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { refetchOnWindowFocus: false } },
+  });
 
   const { username } = useContext(UserContext);
   const { username: adminUsername } = useContext(AdminContext);
   const setUser = useContext(UserDispatchContext);
   const setAdmin = useContext(AdminDispatchContext);
-  const [currentMenu, setCurrentMenu] = useState<string>('');
+  const [currentMenu, setCurrentMenu] = useState<string>('Recipe');
 
   const handleClick = (e: { key: React.SetStateAction<string> }) => {
     setCurrentMenu(e.key);
 
-    if (e.key === 'Logout') setCurrentMenu('Food');
+    if (e.key === 'Logout') setCurrentMenu('Recipe');
   };
 
   const loggedIn = !!(username || adminUsername);
+
+  const isAdmin = !!adminUsername;
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -67,16 +76,10 @@ export const App = () => {
               theme="dark"
             >
               <Menu.Item
-                key="Food"
-                icon={<span className="material-icons">local_pizza</span>}
+                key="Recipe"
+                icon={<span className="material-icons">tapas</span>}
               >
-                <Link to="/">Food</Link>
-              </Menu.Item>
-              <Menu.Item
-                key="Diet"
-                icon={<span className="material-icons">scale</span>}
-              >
-                <Link to="/diet">Diet</Link>
+                <Link to="/">Recipes</Link>
               </Menu.Item>
               <Menu.Item
                 key="Tracking"
@@ -96,6 +99,33 @@ export const App = () => {
               >
                 <Link to="/settings">Settings</Link>
               </Menu.Item>
+              {isAdmin && (
+                <Menu.SubMenu
+                  title="Admin-panel"
+                  icon={<span className="material-icons">build</span>}
+                >
+                  <Menu.Item
+                    key="admin-guide-lines"
+                    icon={<span className="material-icons">menu_book</span>}
+                  >
+                    <Link to="/admin-panel/guide-lines">Manage guidelines</Link>
+                  </Menu.Item>
+                  <Menu.Item
+                    key="admin-recipes"
+                    icon={<span className="material-icons">tapas</span>}
+                  >
+                    <Link to="/admin-panel/recipes">Manage recipes</Link>
+                  </Menu.Item>
+                  <Menu.Item
+                    key="admin-users"
+                    icon={
+                      <span className="material-icons">account_circle</span>
+                    }
+                  >
+                    <Link to="/admin-panel/users">Manage users</Link>
+                  </Menu.Item>
+                </Menu.SubMenu>
+              )}
               <Menu.Item
                 key="Logout"
                 icon={<span className="material-icons">logout</span>}
@@ -106,7 +136,7 @@ export const App = () => {
                   /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
                   // @ts-ignore
                   setAdmin({});
-                  setCurrentMenu('Food');
+                  setCurrentMenu('Recipe');
                 }}
               >
                 Logout
@@ -150,9 +180,24 @@ export const App = () => {
                   <CreateView />
                 </PrivateRoute>
               </Route>
+              <Route path="/admin-panel/users">
+                <PrivateRoute condition={!isAdmin}>
+                  <ManageUsers />
+                </PrivateRoute>
+              </Route>
+              <Route path="/admin-panel/guide-lines">
+                <PrivateRoute condition={!isAdmin}>
+                  <GuideLinesView admin />
+                </PrivateRoute>
+              </Route>
+              <Route path="/admin-panel/recipes">
+                <PrivateRoute condition={!isAdmin}>
+                  <ManageRecipe />
+                </PrivateRoute>
+              </Route>
               <Route path="/">
                 <PrivateRoute condition={!loggedIn} redirect="/login">
-                  <FoodView />
+                  <ManageRecipe />
                 </PrivateRoute>
               </Route>
             </Switch>

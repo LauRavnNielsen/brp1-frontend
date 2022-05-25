@@ -21,6 +21,8 @@ export const LoginView = () => {
     }
   );
 
+  console.log(setRememberUser);
+
   const loginFailedNotification = (placement: any) => {
     notification.info({
       message: `Login failed`,
