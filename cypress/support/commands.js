@@ -10,11 +10,11 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+//Cypress.Commands.add('login', (email, password) => { ... })
 //
 //
 // -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
+//Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
 //
 //
 // -- This is a dual command --
@@ -23,3 +23,11 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+//login command
+Cypress.Commands.add("", (username, password) => {
+    cy.visit('/login')
+    cy.get('#basic_username').type(username);
+    cy.get('#basic_password').type(password);
+    cy.get('form').submit();
+})

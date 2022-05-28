@@ -2,6 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import ReactDOM from 'react-dom';
 import './index.css';
+// eslint-disable-next-line import/no-cycle
 import { App } from './app';
 import { UserContextProvider } from './app/context/user-context';
 import { AdminContextProvider } from './app/context/admin-context';
