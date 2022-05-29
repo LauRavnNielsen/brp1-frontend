@@ -25,8 +25,17 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 //login command
-Cypress.Commands.add("", (username, password) => {
+
+
+Cypress.Commands.add('login', (username, password) => {
     cy.visit('/login')
+    cy.get('#basic_username').type(username);
+    cy.get('#basic_password').type(password);
+    cy.get('form').submit();
+})
+
+Cypress.Commands.add('logina', (username, password) => {
+    cy.visit('/admin')
     cy.get('#basic_username').type(username);
     cy.get('#basic_password').type(password);
     cy.get('form').submit();

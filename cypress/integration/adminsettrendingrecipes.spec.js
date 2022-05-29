@@ -11,9 +11,7 @@ describe('admin setting recipes dashboard', () => {
 
 
     it('add new recipe', () => {
-        cy.get('#basic_username').type('Admin');
-        cy.get('#basic_password').type('admin123');
-        cy.get('form').submit();
+        cy.logina('Admin','admin123')
 
         cy.contains('Admin-panel').click()
         cy.contains('Manage recipes').click()
@@ -22,9 +20,7 @@ describe('admin setting recipes dashboard', () => {
     })
 
     it('delete trending recipe', () => {
-        cy.get('#basic_username').type('Admin');
-        cy.get('#basic_password').type('admin123');
-        cy.get('form').submit();
+        cy.logina('Admin','admin123')
 
         cy.contains('Admin-panel').click()
         cy.contains('Manage recipes').click()

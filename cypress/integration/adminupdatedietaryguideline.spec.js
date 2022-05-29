@@ -11,9 +11,7 @@ describe('admin edit dietary guideline dashboard', () => {
 
 
     it('add new element to the dietary guideline', () => {
-        cy.get('#basic_username').type('Admin');
-        cy.get('#basic_password').type('admin123');
-        cy.get('form').submit();
+        cy.logina('Admin','admin123')
 
         cy.contains('Admin-panel').click()
         cy.contains('Manage guidelines').click()
@@ -24,9 +22,7 @@ describe('admin edit dietary guideline dashboard', () => {
     })
 
     it('cancel adding an element to the dietary guideline', () => {
-        cy.get('#basic_username').type('Admin');
-        cy.get('#basic_password').type('admin123');
-        cy.get('form').submit();
+        cy.logina('Admin','admin123')
 
         cy.contains('Admin-panel').click()
         cy.contains('Manage guidelines').click()
@@ -37,9 +33,7 @@ describe('admin edit dietary guideline dashboard', () => {
     })
 
     it('delete element from the dietary guideline', () => {
-        cy.get('#basic_username').type('Admin');
-        cy.get('#basic_password').type('admin123');
-        cy.get('form').submit();
+        cy.logina('Admin','admin123')
 
         cy.contains('Admin-panel').click()
         cy.contains('Manage guidelines').click()

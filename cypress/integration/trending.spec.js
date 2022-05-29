@@ -11,9 +11,7 @@ describe('trending dashboard', () => {
 
 
     it('view trending recipes', () => {
-        cy.get('#basic_username').type('Tamas');
-        cy.get('#basic_password').type('test12345');
-        cy.get('form').submit();
+        cy.login('Tamas','test12345')
 
 
 

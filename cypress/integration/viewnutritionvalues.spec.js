@@ -11,11 +11,7 @@ describe('view nutrition values dashboard', () => {
 
 
     it('view nutrition values', () => {
-        cy.get('#basic_username').type('Tamas');
-        cy.get('#basic_password').type('test12345');
-        cy.get('form').submit();
-
-
+        cy.login('Tamas','test12345')
 
         cy.url().should('eq','http://localhost:3000/');
         cy.get('[placeholder="Search"]').type('pasta')
@@ -26,11 +22,7 @@ describe('view nutrition values dashboard', () => {
     })
 
     it('view equipments values', () => {
-        cy.get('#basic_username').type('Tamas');
-        cy.get('#basic_password').type('test12345');
-        cy.get('form').submit();
-
-
+        cy.login('Tamas','test12345')
 
         cy.url().should('eq','http://localhost:3000/');
         cy.get('[placeholder="Search"]').type('pasta')
@@ -43,11 +35,7 @@ describe('view nutrition values dashboard', () => {
 
 
     it.only('view ingridients values', () => {
-        cy.get('#basic_username').type('Tamas');
-        cy.get('#basic_password').type('test12345');
-        cy.get('form').submit();
-
-
+        cy.login('Tamas','test12345')
 
         cy.url().should('eq','http://localhost:3000/');
         cy.get('[placeholder="Search"]').type('pasta')
@@ -58,11 +46,7 @@ describe('view nutrition values dashboard', () => {
     })
 
     it('search for non-existing food', () => {
-        cy.get('#basic_username').type('Tamas');
-        cy.get('#basic_password').type('test12345');
-        cy.get('form').submit();
-
-
+        cy.login('Tamas','test12345')
 
         cy.url().should('eq','http://localhost:3000/');
         cy.get('[placeholder="Search"]').type('non-existing')

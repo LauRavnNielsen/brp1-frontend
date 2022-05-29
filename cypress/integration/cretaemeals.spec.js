@@ -11,11 +11,7 @@ describe('create meals dashboard', () => {
 
 
     it('add recipe to meal', () => {
-        cy.get('#basic_username').type('Tamas');
-        cy.get('#basic_password').type('test12345');
-        cy.get('form').submit();
-
-
+        cy.login('Tamas','test12345')
 
         cy.url().should('eq','http://localhost:3000/');
         cy.contains('Tracking').click()
@@ -30,12 +26,7 @@ describe('create meals dashboard', () => {
     })
 
     it.only('change ', () => {
-        cy.get('#basic_username').type('Tamas');
-        cy.get('#basic_password').type('test12345');
-        cy.get('form').submit();
-
-
-
+        cy.login('Tamas','test12345')
         cy.url().should('eq','http://localhost:3000/');
         cy.contains('Tracking').click()
 

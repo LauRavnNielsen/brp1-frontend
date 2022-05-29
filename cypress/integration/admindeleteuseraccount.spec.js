@@ -11,9 +11,7 @@ describe('admin delete user dashboard', () => {
 
 
     it('delete specific user', () => {
-        cy.get('#basic_username').type('Admin');
-        cy.get('#basic_password').type('admin123');
-        cy.get('form').submit();
+        cy.logina('Admin','admin123')
 
         cy.contains('Admin-panel').click()
         cy.contains('Manage users').click()
