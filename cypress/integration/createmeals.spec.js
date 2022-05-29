@@ -1,6 +1,6 @@
 // <reference types="cypress" />
 
-describe('create meals dashboard', () => {
+describe('Tracking dashboard', () => {
 
 
     beforeEach(() => {
@@ -10,7 +10,7 @@ describe('create meals dashboard', () => {
 
 
 
-    it('add recipe to meal', () => {
+    it.only('add recipe to meal', () => {
         cy.login('Tamas','test12345')
 
         cy.url().should('eq','http://localhost:3000/');
@@ -25,7 +25,7 @@ describe('create meals dashboard', () => {
         cy.contains('Confirm breakfast').click()
     })
 
-    it.only('change ', () => {
+    it('change ', () => {
         cy.login('Tamas','test12345')
         cy.url().should('eq','http://localhost:3000/');
         cy.contains('Tracking').click()
