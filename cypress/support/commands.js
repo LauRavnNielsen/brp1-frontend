@@ -34,9 +34,9 @@ Cypress.Commands.add('login', (username, password) => {
     cy.get('form').submit();
 })
 
-Cypress.Commands.add('logina', (username, password) => {
+Cypress.Commands.add('logina', (adminname, password) => {
     cy.visit('/admin')
-    cy.get('#basic_username').type(username);
+    cy.get('#basic_username').type(adminname);
     cy.get('#basic_password').type(password);
     cy.get('form').submit();
 })

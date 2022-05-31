@@ -10,7 +10,7 @@ describe('Tracking dashboard', () => {
 
 
 
-    it.only('add recipe to meal', () => {
+    it('add recipe to meal', () => {
         cy.login('Tamas','test12345')
 
         cy.url().should('eq','http://localhost:3000/');
@@ -25,7 +25,7 @@ describe('Tracking dashboard', () => {
         cy.contains('Confirm breakfast').click()
     })
 
-    it('change ', () => {
+    it('change meal type, unit and amount of food', () => {
         cy.login('Tamas','test12345')
         cy.url().should('eq','http://localhost:3000/');
         cy.contains('Tracking').click()
