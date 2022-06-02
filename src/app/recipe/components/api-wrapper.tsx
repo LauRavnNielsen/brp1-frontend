@@ -21,9 +21,6 @@ export const ApiWrapper = ({ id, trendingId, refetch }: ApiWrapperProps) => {
     enabled: !!id,
   });
 
-  // eslint-disable-next-line react/destructuring-assignment
-  console.log(trendingId);
-
   if (isLoading) return null;
 
   return (

@@ -18,6 +18,8 @@ import { AdminLoginView } from './admin-login/view';
 // eslint-disable-next-line import/no-cycle
 import { ManageRecipe } from './manage-recipe/view';
 import { ManageUsers } from './manage-users/view';
+// eslint-disable-next-line import/no-cycle
+import { TrackingContainer } from './tracking/container';
 
 const PageContainer = styled.div`
   display: flex;
@@ -157,7 +159,7 @@ export const App = () => {
               </Route>
               <Route path="/tracking">
                 <PrivateRoute condition={!loggedIn} redirect="/login">
-                  <TrackingView />
+                  <TrackingContainer />
                 </PrivateRoute>
               </Route>
               <Route path="/settings">
