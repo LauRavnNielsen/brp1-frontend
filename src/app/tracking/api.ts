@@ -30,9 +30,15 @@ export const CreateMeal = (
   createdat: string
 ) => {
   return axios.post(`http://localhost:8080/createMeal`, {
-    username,
+    userID: username,
     foodlist,
     mealtype,
     createdAt: createdat,
+  });
+};
+
+export const GetMealHistory = (username: string, createdAt: string) => {
+  return axios.get(`http://localhost:8080/getMealHistory`, {
+    params: { username, createdAt },
   });
 };

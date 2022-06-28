@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Col, Row } from 'antd';
+import { Button, Col, DatePicker, Row } from 'antd';
 // eslint-disable-next-line import/no-cycle
 import { useMutation } from 'react-query';
 // eslint-disable-next-line import/no-cycle
@@ -9,19 +9,24 @@ import { AddFoodThing } from './components/add-food-thing';
 // eslint-disable-next-line import/no-cycle
 import { CreateMeal } from './api';
 import { UserContext } from '../context/user-context';
+// eslint-disable-next-line import/no-cycle
+import { Nutrients } from './components/nutrients';
 
 type TrackingViewProps = {
   createMeal: (e: number) => void;
-  breakfast: { name: string; servings: number; unit: string }[];
-  lunch: { name: string; servings: number; unit: string }[];
-  dinner: { name: string; servings: number; unit: string }[];
-  snacks: { name: string; servings: number; unit: string }[];
+  breakfast: { name: string; servings: number; unit: string; id: string }[];
+  lunch: { name: string; servings: number; unit: string; id: string }[];
+  dinner: { name: string; servings: number; unit: string; id: string }[];
+  snacks: { name: string; servings: number; unit: string; id: string }[];
   addFoodToMeal: (
     meal: string,
     name: string,
     servings: number,
-    unit: string
+    unit: string,
+    id: string
   ) => void;
+  mealTracker: boolean;
+  setDate: $TSFixMe;
 };
 
 export const TrackingView = ({
@@ -31,11 +36,22 @@ export const TrackingView = ({
   lunch,
   snacks,
   addFoodToMeal,
+  mealTracker,
+  setDate,
 }: TrackingViewProps) => {
+  const [showAddToBreakfast, setShowAddToBreakfast] = useState(true);
+  const [showAddToLunch, setShowAddToLunch] = useState(true);
+  const [showAddToDinner, setShowAddToDinner] = useState(true);
+  const [showAddToSnacks, setShowAddToSnacks] = useState(true);
+
   return (
     <div style={{ height: '100%' }}>
-      <div style={{ fontSize: '2rem', marginBottom: '2rem' }}>Tracking</div>
-      <div style={{ minHeight: '30%' }}>
+      <div style={{ fontSize: '2rem', marginBottom: '2rem' }}>
+        {mealTracker ? 'Meal history' : 'Tracking'}
+      </div>
+      {/* @ts-expect-error WIP */}
+      {mealTracker && <DatePicker onChange={(e) => setDate(e)} />}
+      <div style={{ minHeight: '30%', marginTop: '1rem' }}>
         <Row gutter={[16, 200]}>
           <Col span={6}>
             <Row>
@@ -51,10 +67,13 @@ export const TrackingView = ({
                   </div>
                 ))}
               </Col>
-              {breakfast.length > 0 && (
+              {breakfast.length > 0 && !mealTracker && showAddToBreakfast && (
                 <Button
                   style={{ marginTop: '1rem' }}
-                  onClick={() => createMeal(1)}
+                  onClick={() => {
+                    createMeal(1);
+                    setShowAddToBreakfast(false);
+                  }}
                 >
                   Confirm breakfast
                 </Button>
@@ -75,10 +94,13 @@ export const TrackingView = ({
                   </div>
                 ))}
               </Col>
-              {lunch.length > 0 && (
+              {lunch.length > 0 && !mealTracker && showAddToLunch && (
                 <Button
                   style={{ marginTop: '1rem' }}
-                  onClick={() => createMeal(2)}
+                  onClick={() => {
+                    createMeal(2);
+                    setShowAddToLunch(false);
+                  }}
                 >
                   Confirm lunch
                 </Button>
@@ -99,10 +121,13 @@ export const TrackingView = ({
                   </div>
                 ))}
               </Col>
-              {dinner.length > 0 && (
+              {dinner.length > 0 && !mealTracker && showAddToDinner && (
                 <Button
                   style={{ marginTop: '1rem' }}
-                  onClick={() => createMeal(3)}
+                  onClick={() => {
+                    createMeal(3);
+                    setShowAddToDinner(false);
+                  }}
                 >
                   Confirm dinner
                 </Button>
@@ -123,10 +148,13 @@ export const TrackingView = ({
                   </div>
                 ))}
               </Col>
-              {snacks.length > 0 && (
+              {snacks.length > 0 && !mealTracker && showAddToSnacks && (
                 <Button
                   style={{ marginTop: '1rem' }}
-                  onClick={() => createMeal(4)}
+                  onClick={() => {
+                    createMeal(4);
+                    setShowAddToSnacks(false);
+                  }}
                 >
                   Confirm snacks
                 </Button>
@@ -135,10 +163,25 @@ export const TrackingView = ({
           </Col>
         </Row>
       </div>
-      <div style={{ minHeight: '70%', fontWeight: 600 }}>
-        <div style={{ fontSize: '1rem', marginBottom: '1rem' }}>Add foods</div>
-        <AddFoodThing addFoodToMeal={addFoodToMeal} />
-      </div>
+      {!mealTracker && (
+        <div style={{ minHeight: '70%', fontWeight: 600 }}>
+          <div style={{ fontSize: '1rem', marginBottom: '1rem' }}>
+            Add foods
+          </div>
+          <AddFoodThing addFoodToMeal={addFoodToMeal} />
+        </div>
+      )}
+      {mealTracker && (
+        <div style={{ minHeight: '70%', fontWeight: 600 }}>
+          <Nutrients
+            bulkIngredients={[...breakfast, ...lunch, ...dinner, ...snacks]}
+            id=""
+            servings={0}
+            showNut
+            unit=""
+          />
+        </div>
+      )}
     </div>
   );
 };

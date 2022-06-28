@@ -90,6 +90,12 @@ export const App = () => {
                 <Link to="/tracking">Tracking</Link>
               </Menu.Item>
               <Menu.Item
+                key="Meals"
+                icon={<span className="material-icons">calendar_month</span>}
+              >
+                <Link to="/meal-history">Meal history</Link>
+              </Menu.Item>
+              <Menu.Item
                 key="Dietary guidelines"
                 icon={<span className="material-icons">menu_book</span>}
               >
@@ -159,7 +165,12 @@ export const App = () => {
               </Route>
               <Route path="/tracking">
                 <PrivateRoute condition={!loggedIn} redirect="/login">
-                  <TrackingContainer />
+                  <TrackingContainer mealTracker={false} />
+                </PrivateRoute>
+              </Route>
+              <Route path="/meal-history">
+                <PrivateRoute condition={!loggedIn} redirect="/login">
+                  <TrackingContainer mealTracker />
                 </PrivateRoute>
               </Route>
               <Route path="/settings">

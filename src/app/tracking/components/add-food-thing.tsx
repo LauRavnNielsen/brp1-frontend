@@ -137,7 +137,13 @@ export const AddFoodThing = ({ addFoodToMeal }: AddFoodThingProps) => {
                   <Col span={12}>
                     <Button
                       onClick={() =>
-                        addFoodToMeal(meal, ingredient.name, servings, unit)
+                        addFoodToMeal(
+                          meal,
+                          ingredient.name,
+                          servings,
+                          unit,
+                          ingredient.id
+                        )
                       }
                       style={{ marginRight: '1rem' }}
                       type="primary"
@@ -153,6 +159,7 @@ export const AddFoodThing = ({ addFoodToMeal }: AddFoodThingProps) => {
             </Col>
             <Col span={9} offset={1}>
               <Nutrients
+                bulkIngredients={[]}
                 id={ingredient.id}
                 unit={unit}
                 servings={servings}
